@@ -12,10 +12,14 @@ ingredient_in_hand = "cheese"
 x = 0
 y = -200
 
+cheese_stamps_x = []
+cheese_stamps_y = []
+pepperoni_stamps_x = []
+pepperoni_stamps_y = []
+
 
 
 drawer.hideturtle()
-drawer.write("PIZZA MAKER", align = "center", font=("Arial", 80, "normal"))
 drawer.penup()
 
 screen = trt.Screen()
@@ -31,7 +35,8 @@ screen.register_shape("cheese.gif")
 screen.register_shape("cheese_hand.gif")
 screen.register_shape("pepperoni.gif")
 screen.register_shape("pepperoni_hand.gif")
-
+screen.register_shape("BG.gif")
+screen.bgpic("BG.gif")
 
 player.shape("cheese_hand.gif")
 player.penup()
@@ -40,6 +45,11 @@ def stop():
     global running
     running = False
     exit()
+def bake():
+    drawer.clearstamps()
+    player.clearstamps()
+    player.hideturtle()
+
 
 while running:
     if keyboard.is_pressed("w"):
@@ -64,8 +74,12 @@ while running:
             player.shape(ingredient_in_hand + "_hand.gif")
             if ingredient_in_hand == "pepperoni":
                 pepperoni_number -= 1
+                pepperoni_stamps_x.append(x)
+                pepperoni_stamps_y.append(y)
             elif ingredient_in_hand == "cheese":
                 cheese_number -= 1
+                cheese_stamps_x.append(x)
+                cheese_stamps_y.append(y)
             time.sleep(.2)
 
 
