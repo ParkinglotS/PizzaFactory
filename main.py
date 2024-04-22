@@ -101,11 +101,11 @@ while running:
             player.shape(ingredient_in_hand + ".gif")
             player.stamp()
             player.shape(ingredient_in_hand + "_hand.gif")
-            if ingredient_in_hand == "pepperoni":
+            if ingredient_in_hand == "pepperoni" and pepperoni_number > 0:
                 pepperoni_number -= 1
                 pepperoni_stamps_x.append(x)
                 pepperoni_stamps_y.append(y)
-            elif ingredient_in_hand == "cheese":
+            elif ingredient_in_hand == "cheese" and cheese_number > 0:
                 cheese_number -= 1
                 cheese_stamps_x.append(x)
                 cheese_stamps_y.append(y)
