@@ -11,18 +11,22 @@ ingredient_in_hand = "cheese"
 
 x = 0
 y = -200
-
+screen = trt.Screen()
 cheese_stamps_x = []
 cheese_stamps_y = []
 pepperoni_stamps_x = []
 pepperoni_stamps_y = []
 
-
+customer = trt.Turtle()
+customer.penup()
+screen.register_shape("customer1.gif")
+screen.register_shape("customer1talking.gif")
+customer.shape("customer1.gif")
 
 drawer.hideturtle()
 drawer.penup()
 
-screen = trt.Screen()
+
 screen.register_shape("Pizza-no-stuff.gif")
 
 drawer.goto(x,y)
@@ -31,6 +35,7 @@ drawer.stamp()
 
 
 player = trt.Turtle()
+
 screen.register_shape("cheese.gif")
 screen.register_shape("cheese_hand.gif")
 screen.register_shape("melted_cheese.gif")
@@ -38,7 +43,9 @@ screen.register_shape("pepperoni.gif")
 screen.register_shape("pepperoni_hand.gif")
 screen.register_shape("Burnt_pizza.gif")
 screen.register_shape("BG.gif")
+
 screen.bgpic("BG.gif")
+
 
 music = 'music1.wav'
 pygame.mixer.init()
@@ -46,11 +53,17 @@ pygame.mixer.Channel(0).play(pygame.mixer.Sound(music), 999)
 
 player.shape("cheese_hand.gif")
 player.penup()
+
+
+customer.goto(0, -100)
+
 running = True
 def stop():
     global running
     running = False
     exit()
+
+customertime = 10
 def bake(timerinput):
     drawer.clearstamps()
     player.clearstamps()
