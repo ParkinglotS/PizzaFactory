@@ -9,6 +9,8 @@ pepperoni_number = 10
 cheese_number = 10
 ingredient_in_hand = "cheese"
 
+success = True
+
 x = 0
 y = -200
 screen = trt.Screen()
@@ -43,6 +45,7 @@ screen.register_shape("pepperoni.gif")
 screen.register_shape("pepperoni_hand.gif")
 screen.register_shape("Burnt_pizza.gif")
 screen.register_shape("BG.gif")
+screen.register_shape("win.gif")
 
 screen.bgpic("BG.gif")
 
@@ -64,6 +67,9 @@ def stop():
     exit()
 
 customertime = 10
+customercheese = 10
+customerpepperoni = 5
+
 def bake(timerinput):
     drawer.clearstamps()
     player.clearstamps()
@@ -82,7 +88,7 @@ def bake(timerinput):
         drawer.shape("Pizza-no-stuff.gif")
         drawer.stamp()
         player.shape("melted_cheese.gif")
-        for i in cheese_stamps_x:
+        for i in range(len(cheese_stamps_x)):
             player.goto(cheese_stamps_x[i], cheese_stamps_y[i])
             player.stamp()
         player.shape("pepperoni.gif")
@@ -126,6 +132,18 @@ while running:
     if keyboard.is_pressed("b"):
         timer = int(trt.textinput("Baking Time", "How many seconds?"))
         bake(timer)
+        if not timer == customertime or not len(cheese_stamps_y) == customercheese or not len(pepperoni_stamps_x) == customerpepperoni:
+            success = False
+            print("failure")
+        else:
+            print(success)
+
+        customer.goto(0,0)
+        customer.shape("win.gif")
+        customer.stamp()
+        
+        break
+        
 
 
 
