@@ -1,5 +1,5 @@
 import turtle as trt
-import keyboard, time, pygame
+import keyboard, time, pygame, random
 
 pygame.init()  
 drawer = trt.Turtle()
@@ -8,6 +8,12 @@ drawer.speed(0)
 pepperoni_number = 10
 cheese_number = 10
 ingredient_in_hand = "cheese"
+
+customertime = random.randint(5, 15)
+customercheese = random.randint(0, 10)
+customerpepperoni = random.randint(0, 10)
+if customerpepperoni == 0 and customercheese == 0:
+    customercheese += 1
 
 success = True
 
@@ -28,13 +34,15 @@ customer.shape("customer1.gif")
 drawer.hideturtle()
 drawer.penup()
 
+writer = trt.Turtle()
+writer.penup()
+writer.hideturtle()
 
 screen.register_shape("Pizza-no-stuff.gif")
 
 drawer.goto(x,y)
 drawer.shape("Pizza-no-stuff.gif")
 drawer.stamp()
-
 
 player = trt.Turtle()
 
@@ -48,7 +56,7 @@ screen.register_shape("BG.gif")
 screen.register_shape("win.gif")
 
 screen.bgpic("BG.gif")
-
+screen.bgcolor("green")
 
 music = 'music1.wav'
 pygame.mixer.init()
@@ -59,16 +67,14 @@ player.penup()
 
 
 customer.goto(0, -100)
+writer.goto(200, 200)
+writer.write(str(customercheese) + " cheese\n" + str(customerpepperoni) + " pepperoni\n" + str(customertime) + " seconds of baking", font=("Comic Sans MS", 20))
 
 running = True
 def stop():
     global running
     running = False
     exit()
-
-customertime = 10
-customercheese = 10
-customerpepperoni = 5
 
 def bake(timerinput):
     drawer.clearstamps()
@@ -98,6 +104,8 @@ def bake(timerinput):
     pygame.mixer.init()
     pygame.mixer.Channel(0).play(pygame.mixer.Sound(music), 999)
 
+player.goto(x, y)
+trt.textinput("Welcome!", "to place an ingredient, press SPACE\nto switch to pepperoni, use P, and for cheese, press C\nWASD to move\nB to bake")
 
 while running:
     if keyboard.is_pressed("w"):
@@ -135,13 +143,15 @@ while running:
         if not timer == customertime or not len(cheese_stamps_y) == customercheese or not len(pepperoni_stamps_x) == customerpepperoni:
             success = False
             print("failure")
+            pygame.mixer.Channel(0).play(pygame.mixer.Sound('LOSING.wav'))
         else:
             print(success)
-
-        customer.goto(0,0)
-        customer.shape("win.gif")
-        customer.stamp()
-        
+            customer.hideturtle()
+            customer.setx(0)
+            customer.sety(0)
+            customer.shape("win.gif")
+            customer.stamp()
+            pygame.mixer.Channel(0).play(pygame.mixer.Sound('WINNING.wav'))
         break
         
 
