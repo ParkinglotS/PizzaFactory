@@ -54,6 +54,7 @@ screen.register_shape("pepperoni_hand.gif")
 screen.register_shape("Burnt_pizza.gif")
 screen.register_shape("BG.gif")
 screen.register_shape("win.gif")
+screen.register_shape("lose.gif")
 
 screen.bgpic("BG.gif")
 screen.bgcolor("green")
@@ -67,8 +68,8 @@ player.penup()
 
 
 customer.goto(0, -100)
-writer.goto(200, 200)
-writer.write(str(customercheese) + " cheese\n" + str(customerpepperoni) + " pepperoni\n" + str(customertime) + " seconds of baking", font=("Comic Sans MS", 20))
+writer.goto(150, 235)
+writer.write("ORDER:\n" + str(customercheese) + " cheese\n" + str(customerpepperoni) + " pepperoni\n" + str(customertime) + " seconds of baking", font=("Comic Sans MS", 17))
 
 running = True
 def stop():
@@ -141,17 +142,27 @@ while running:
         timer = int(trt.textinput("Baking Time", "How many seconds?"))
         bake(timer)
         if not timer == customertime or not len(cheese_stamps_y) == customercheese or not len(pepperoni_stamps_x) == customerpepperoni:
-            success = False
-            print("failure")
             pygame.mixer.Channel(0).play(pygame.mixer.Sound('LOSING.wav'))
+            time.sleep(2)
+            customer.shape("customer1talking.gif")
+            customer.setx(0)
+            customer.sety(0)
+            time.sleep(2)
+            customer.hideturtle()
+            customer.shape("lose.gif")
+            customer.stamp()
         else:
-            print(success)
+            pygame.mixer.Channel(0).play(pygame.mixer.Sound('WINNING.wav'))
+            time.sleep(2)
+            customer.shape("customer1talking.gif")
+            customer.setx(0)
+            customer.sety(0)
+            time.sleep(2)
             customer.hideturtle()
             customer.setx(0)
             customer.sety(0)
             customer.shape("win.gif")
             customer.stamp()
-            pygame.mixer.Channel(0).play(pygame.mixer.Sound('WINNING.wav'))
         break
         
 
