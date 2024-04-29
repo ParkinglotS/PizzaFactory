@@ -1,13 +1,6 @@
 #imports
 import turtle as trt
 import keyboard, time, pygame, random
-"""
-Title: PizzaFactory
-Author: Parker Szymczak
-Date: 4/28/24
-Code version: 9.0
-Availability: https://github.com/ParkinglotS/PizzaFactory.git
-"""
 
 #pygame used only for music
 pygame.init()  
@@ -96,13 +89,6 @@ writer.goto(150, 235)
 writer.write("ORDER:\n" + str(customercheese) + " cheese\n" + str(customerpepperoni) + " pepperoni\n" + str(customertime) + " seconds of baking", font=("Comic Sans MS", 17))
 
 #baking function (takes in how long you want it to bake)
-"""
-Title: bake (function)
-Author: Parker Szymczak
-Date: 4/28/24
-Code version: 9.0
-Availability: https://github.com/ParkinglotS/PizzaFactory.git
-"""
 def bake(timerinput):
     #clears the pizza, presumably putting it in the oven
     drawer.clearstamps()
@@ -151,13 +137,6 @@ writer.write(playerName + "'s\nPizza Factory", font = ("Comic Sans MS", 17, "ita
 player.goto(x, y)
 
 #mainloop
-"""
-Title: PizzaFactory mainloop
-Author: Parker Szymczak
-Date: 4/28/24
-Code version: 9.0
-Availability: https://github.com/ParkinglotS/PizzaFactory.git
-"""
 while True:
     #movement
     if keyboard.is_pressed("w"):
